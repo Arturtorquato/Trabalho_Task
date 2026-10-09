@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f5f2">
+  <title>Minhas tarefas | Taskly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#tasks" aria-label="Taskly início">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>
+        <span>taskly</span>
+      </a>
+
+      <div class="side-label">ESPAÇO DE TRABALHO</div>
+      <nav class="side-nav">
+        <a class="nav-link" href="#overview"><span class="nav-icon">◫</span>Visão geral</a>
+        <a class="nav-link active" href="#tasks"><span class="nav-icon">▤</span>Minhas tarefas <span class="nav-count" id="nav-count">0</span></a>
+      </nav>
+
+      <div class="side-bottom">
+        <div class="workspace-card">
+          <span class="workspace-dot"></span>
+          <div><strong>Meu espaço</strong><small>Plano pessoal</small></div>
+          <span class="workspace-more">···</span>
+        </div>
+        <div class="profile-row">
+          <span class="avatar avatar-esther">EH</span>
+          <div><strong>Esther Howard</strong><small>Administradora</small></div>
+          <button class="icon-button profile-menu" type="button" aria-label="Opções do perfil">···</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="tasks">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Meu espaço</span><span class="crumb-slash">/</span><strong>Tarefas</strong></div>
+        <div class="topbar-actions">
+          <span class="today-label" id="today-label"></span>
+          <button class="icon-button notification-button" type="button" aria-label="Notificações" title="Notificações">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span class="notification-dot"></span>
+          </button>
+          <span class="avatar avatar-esther top-avatar">EH</span>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <section class="page-heading" id="overview">
+          <div>
+            <div class="eyebrow"><span></span> SEU DIA, BEM ORGANIZADO</div>
+            <h1>Minhas tarefas</h1>
+            <p>Um passo de cada vez. Veja o que precisa da sua atenção.</p>
+          </div>
+          <button class="primary-button" id="new-task-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            Nova tarefa
+          </button>
+        </section>
+
+        <section class="stats-grid" aria-label="Resumo das tarefas">
+          <article class="stat-card total-stat">
+            <div class="stat-top"><span class="stat-icon"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><span class="stat-caption">TAREFAS NO TOTAL</span><span class="stat-spark">↗</span></div>
+            <div class="stat-value" id="total-stat">0</div><div class="stat-foot">Em todos os períodos</div>
+          </article>
+          <article class="stat-card done-stat">
+            <div class="stat-top"><span class="stat-icon"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><span class="stat-caption">CONCLUÍDAS</span><span class="stat-spark">✳</span></div>
+            <div class="stat-value" id="done-stat">0</div><div class="stat-foot"><span id="completion-rate">0%</span> do total concluído</div>
+          </article>
+          <article class="stat-card overdue-stat">
+            <div class="stat-top"><span class="stat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="stat-caption">EM ATRASO</span><span class="stat-spark">!</span></div>
+            <div class="stat-value" id="overdue-stat">0</div><div class="stat-foot" id="overdue-note">Tudo em dia por aqui</div>
+          </article>
+        </section>
+
+        <section class="task-panel" aria-label="Lista de tarefas">
+          <div class="panel-topline">
+            <div class="period-tabs" role="tablist" aria-label="Filtrar período">
+              <button class="period-tab active" data-period="DAILY" role="tab" aria-selected="true">Diárias <span id="daily-count">0</span></button>
+              <button class="period-tab" data-period="WEEKLY" role="tab" aria-selected="false">Semanais <span id="weekly-count">0</span></button>
+              <button class="period-tab" data-period="MONTHLY" role="tab" aria-selected="false">Mensais <span id="monthly-count">0</span></button>
+            </div>
+            <div class="list-tools">
+              <label class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="search-input" type="search" placeholder="Buscar tarefa ou pessoa" aria-label="Buscar tarefa ou pessoa"></label>
+              <label class="status-filter"><span class="filter-label">Status</span><select id="status-filter" aria-label="Filtrar por status"><option value="">Todos</option><option value="NOT_STARTED">Não iniciada</option><option value="IN_PROGRESS">Em andamento</option><option value="DONE">Concluída</option></select></label>
+            </div>
+          </div>
+
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th class="task-col">Tarefa</th><th class="person-col">Responsável</th><th class="priority-col">Prioridade</th><th class="date-col">Prazo</th><th class="status-col">Status</th><th class="actions-col"><span class="sr-only">Ações</span></th></tr></thead>
+              <tbody id="task-rows"><tr><td class="empty-state" colspan="6">Carregando suas tarefas...</td></tr></tbody>
+            </table>
+          </div>
+          <div class="table-footer"><span id="results-count">0 tarefas</span><span class="footer-note"><span class="live-dot"></span>Sincronizado agora</span></div>
+        </section>
+        <footer class="page-footer"><span>Taskly <span class="footer-separator">·</span> Seu trabalho, em fluxo.</span><span>Feito para manter o foco.</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="task-dialog" class="task-dialog">
+    <form id="task-form">
+      <div class="dialog-heading"><div><span class="dialog-kicker">DETALHES DA TAREFA</span><h2 id="dialog-title">Nova tarefa</h2></div><button class="icon-button close-dialog" type="button" aria-label="Fechar">×</button></div>
+      <input id="task-id" type="hidden">
+      <label class="form-field full-field"><span>Nome da tarefa</span><input id="task-title" name="title" maxlength="140" placeholder="Ex.: Preparar apresentação" required></label>
+      <label class="form-field full-field"><span>Descrição <small>OPCIONAL</small></span><textarea id="task-description" name="description" rows="3" placeholder="Adicione um pouco de contexto..."></textarea></label>
+      <div class="form-grid">
+        <label class="form-field"><span>Responsável</span><input id="task-assignee" name="assignee" placeholder="Nome da pessoa"></label>
+        <label class="form-field"><span>Período</span><select id="task-period" name="period"><option value="DAILY">Diária</option><option value="WEEKLY">Semanal</option><option value="MONTHLY">Mensal</option></select></label>
+        <label class="form-field"><span>Prioridade</span><select id="task-priority" name="priority"><option value="LOW">Baixa</option><option value="MEDIUM" selected>Média</option><option value="URGENT">Urgente</option></select></label>
+        <label class="form-field"><span>Status</span><select id="task-status" name="status"><option value="NOT_STARTED">Não iniciada</option><option value="IN_PROGRESS">Em andamento</option><option value="DONE">Concluída</option></select></label>
+        <label class="form-field full-field"><span>Data e hora do prazo</span><input id="task-due" name="dueDateTime" type="datetime-local" required></label>
+      </div>
+      <p class="form-error" id="form-error" role="alert"></p>
+      <div class="dialog-actions"><button class="text-button" id="cancel-dialog" type="button">Cancelar</button><button class="primary-button" id="save-task" type="submit">Salvar tarefa</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
